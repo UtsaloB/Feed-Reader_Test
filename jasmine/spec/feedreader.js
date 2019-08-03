@@ -61,7 +61,7 @@ $(function() {
          */    
         it('menu hidden by default', function(){
             expect(document.body.classList.contains('menu-hidden')).toBe(true);
-        })    
+        });    
 
          /* TODO: Write a test that ensures the menu changes
           * visibility when the menu icon is clicked. This test
@@ -73,7 +73,7 @@ $(function() {
             expect(document.body.classList.contains('menu-hidden')).toBe(false);
             document.querySelector('a.menu-icon-link').click();
             expect(document.body.classList.contains('menu-hidden')).toBe(true);
-        })
+        });
     })
 
 
@@ -86,8 +86,13 @@ $(function() {
          * Remember, loadFeed() is asynchronous so this test will require
          * the use of Jasmine's beforeEach and asynchronous done() function.
          */
-
-    })
+        beforeEach(function(done){
+            loadFeed(1, done);
+        });
+        it('there is at least a single entry', function(){
+            expect($('.entry.feed')).toBeDefined();
+        });
+    });
 
 
     /* TODO: Write a new test suite named "New Feed Selection" */
@@ -96,7 +101,23 @@ $(function() {
          * by the loadFeed function that the content actually changes.
          * Remember, loadFeed() is asynchronous.
          */
-    
-    })
+        let firstEntry, secondEntry;
+       
+        //     $('.feed'),empty();
+         beforeEach(function(done){
+            loadFeed(0, function(){
+                //         firstEntry = $('.feed').find(allFeeds.url);
+                //         done();
+                firstEntry = document.querySelector('div.feed').innerHTML;
+                loadFeed(1, function(){
+                    secondEntry = document.querySelector('div.feed').innerHTML;
+                    done();
+                })
+            })
+        })
+        it('new feed content loaded', function(){
+            expect(firstEntry).not.toBe(secondEntry);
+        });
+    });
 
 }());
