@@ -5,7 +5,7 @@
  * to ensure they don't run until the DOM is ready.
  */
 $(function() {
-    /* First test suite
+    // First test suite
     describe('RSS Feeds', function() {
         /* First test
          */
