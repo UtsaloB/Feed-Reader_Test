@@ -47,7 +47,7 @@ $(function() {
             loadFeed(1, done);
         });
         it('there is at least a single entry', function(){
-            expect($('.entry.feed')).toBeGreaterThan(0);
+            expect($('.feed').has('.entry').length).toBeGreaterThan(0);
         });
     });
 
